@@ -9,6 +9,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".FinishQuizActivity">
+        </activity>
+        <activity android:name=".QuizActivity">
+        </activity>
+        <activity android:name=".GamesActivity">
+        </activity>
         <activity android:name=".ReportActivity">
         </activity>
         <activity android:name=".RegisterActivity">
@@ -28,12 +34,11 @@
         </activity>
         <activity android:name=".ChatRoom2Activity">
         </activity>
-        <activity android:name="com.example.wabproject.ChatRoom1Activity">
+        <activity android:name=".ChatRoom1Activity">
         </activity>
         <activity android:name=".ChatActivity">
         </activity>
         <activity android:name=".MainActivity">
-
         </activity>
     </application>
 

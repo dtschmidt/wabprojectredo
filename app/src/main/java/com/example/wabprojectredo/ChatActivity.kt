@@ -3,7 +3,7 @@ package com.example.wabprojectredo
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.example.wabproject.ChatRoom1Activity
+//import com.example.wabproject.ChatRoom1Activity
 import kotlinx.android.synthetic.main.activity_chat.*
 
 class ChatActivity : AppCompatActivity() {

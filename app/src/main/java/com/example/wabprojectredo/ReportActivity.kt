@@ -142,7 +142,6 @@ class ReportActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("/reports/$uid/$reportid")
         val report = Report(uid, reportid, email, enteredName, enteredDate, enteredDescription, imageurl)
 
-
         //what actually uploads the report to the database
         ref.setValue(report)
             .addOnSuccessListener {
