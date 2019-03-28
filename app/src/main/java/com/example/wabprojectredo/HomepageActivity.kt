@@ -22,6 +22,11 @@ class HomepageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btn_home_games.setOnClickListener {
+            val intent = Intent(this, GamesActivity::class.java)
+            startActivity(intent)
+        }
+
         btn_homepage_music.setOnClickListener {
             val intent = Intent(this, MusicActivity::class.java)
             startActivity(intent)

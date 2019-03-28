@@ -11,11 +11,11 @@
         tools:context=".HomepageActivity">
 
     <Button
-            android:text="Button"
+            android:text="Games"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".2"
-            android:id="@+id/button13" android:layout_marginBottom="0dp"
+            android:id="@+id/btn_home_games" android:layout_marginBottom="0dp"
             android:layout_marginTop="15dp" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>
     <Button
             android:text="MUSIC"
