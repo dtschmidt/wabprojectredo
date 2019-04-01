@@ -22,7 +22,7 @@ class HomepageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btn_home_games.setOnClickListener {
+        btn_homepage_game.setOnClickListener {
             val intent = Intent(this, GamesActivity::class.java)
             startActivity(intent)
         }
