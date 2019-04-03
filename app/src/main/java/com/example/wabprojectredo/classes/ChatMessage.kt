@@ -5,7 +5,8 @@ class ChatMessage(val id:String,
                   val fromId:String,
                   val fromUsername:String?,
                   val roomName:String,
-                  val timestamp:String){
+                  val timestamp:String,
+                  val longtimestamp:Long){
 
-    constructor() : this("","","","","","")
+    constructor() : this("","","","","","", -1)
 }

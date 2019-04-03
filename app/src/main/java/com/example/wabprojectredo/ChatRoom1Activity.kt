@@ -51,7 +51,8 @@ class ChatRoom1Activity : AppCompatActivity() {
     }
 
     private fun listenForMessages(){
-        val ref = FirebaseDatabase.getInstance().getReference("/messages/ChatRoom1")
+        //orderbychild orders the posts by their timestamps. limittolast gets the most recent 100 posts based on that order
+        val ref = FirebaseDatabase.getInstance().getReference("/messages/ChatRoom1").orderByChild("longtimestamp").limitToLast(4)
 
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -125,7 +126,7 @@ class ChatRoom1Activity : AppCompatActivity() {
 
         val reference = FirebaseDatabase.getInstance().getReference("/messages/ChatRoom1").push()
 
-        val chatMessage = ChatMessage(reference.key!!, text, fromId, fromUsername, roomName, currentTimeFormatted)
+        val chatMessage = ChatMessage(reference.key!!, text, fromId, fromUsername, roomName, currentTimeFormatted, System.currentTimeMillis())
         reference.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "Chat message saved in database: ${reference.key}")

@@ -23,9 +23,9 @@
     <TextView
             android:text="sdakljfhdslkfhsdlkjhflkdsjhflkajshflksdhakljdf"
             android:layout_width="0dp"
-            android:layout_height="192dp"
+            android:layout_height="wrap_content"
             android:id="@+id/txtview_quiz_qtext"
-            app:layout_constraintStart_toStartOf="parent" android:fontFamily="sans-serif" android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent" android:fontFamily="sans-serif" android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp" android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/txtview_quiz_questionnum"
@@ -35,37 +35,9 @@
             android:layout_width="0dp"
             android:layout_height="59dp"
             android:id="@+id/txtview_quiz_questionnum" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:fontFamily="sans-serif" android:textSize="36sp"
+            app:layout_constraintStart_toStartOf="parent" android:fontFamily="sans-serif" android:textSize="24sp"
             android:layout_marginLeft="32dp" android:layout_marginRight="32dp" android:layout_marginTop="64dp"
             app:layout_constraintTop_toTopOf="parent" android:textColor="@color/colorPrimaryDark"/>
-    <RadioGroup
-            android:layout_width="0dp"
-            android:layout_height="104dp"
-            android:id="@+id/radiogroup_quiz" android:visibility="visible"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/txtview_quiz_qtext"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp">
-        <RadioButton
-                android:text="Selection 1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/radio_quiz_1" android:layout_weight="1"
-                android:textColor="@android:color/white" android:textSize="24sp"/>
-        <RadioButton
-                android:text="Selection 2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/radio_quiz_2" android:layout_weight="1"
-                android:textColor="@android:color/white" android:textSize="24sp"/>
-        <RadioButton
-                android:text="Selection 3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/radio_quiz_3" android:layout_weight="1"
-                android:textColor="@android:color/white" android:textSize="24sp"/>
-        <RadioButton
-                android:text="Selection 4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/radio_quiz_4" android:layout_weight="1"
-                android:textColor="@android:color/white" android:textSize="24sp"/>
-    </RadioGroup>
     <Button
             android:text="Submit"
             android:layout_width="wrap_content"
@@ -74,4 +46,27 @@
             android:id="@+id/btn_quiz_submitnext" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="32dp" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginRight="32dp"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtview_quiz_qtext" android:layout_margin="32dp">
+        <Button
+                android:text="option 1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btn_quiz_1"/>
+        <Button
+                android:text="option 2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btn_quiz_2"/>
+        <Button
+                android:text="option 3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btn_quiz_3"/>
+        <Button
+                android:text="option 4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btn_quiz_4"/>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

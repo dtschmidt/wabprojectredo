@@ -19,6 +19,12 @@ import java.time.format.DateTimeFormatter
 
 class QuizActivity : AppCompatActivity() {
 
+    interface Callback {
+        fun onComplete() {
+
+        }
+    }
+
     companion object {
 
         var questionArray = arrayOf<Question>()
@@ -34,80 +40,85 @@ class QuizActivity : AppCompatActivity() {
         var totalQuestions = 0
 
         var submittedYet = false
+
+        var doneCollecting = false
+
+        var isSomethingChecked = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
-        val questionArray = intent.getParcelableArrayExtra("questionArray")
+        //val questionArray = intent.getParcelableArrayExtra("questionArray")
 
-        main()
-
-
-        //TODO: note that an array starts at 0, need to fix
-        //TODO: this while loop goes through real quick and doesnt actually do anything
-    }
-
-    fun main() = runBlocking{
         listenForQuestions()
-        aaa()
+
+        btn_quiz_1.setOnClickListener {
+            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+            isSomethingChecked = true
+
+            if (btn_quiz_1.text != questionArray[questionNumber].correctAnswer){
+                highlightCorrectAnswer()
+                btn_quiz_1.setBackgroundColor(Color.RED)
+                btn_quiz_submitnext.text = "NEXT"
+            }
+            else if (btn_quiz_1.text == questionArray[questionNumber].correctAnswer){
+                questionsCorrect++
+                btn_quiz_1.setBackgroundColor(Color.GREEN)
+                btn_quiz_submitnext.text = "NEXT"
+            }
+        }
+
+        btn_quiz_2.setOnClickListener {
+
+        }
+
+        btn_quiz_3.setOnClickListener {
+
+        }
+
+        btn_quiz_4.setOnClickListener {
+
+        }
+        btn_quiz_submitnext.setOnClickListener {
+            if (isSomethingChecked) {
+                questionNumber++
+                aaa()
+            }
+            else if (!isSomethingChecked){
+                Toast.makeText(this, "Please make a selection.", Toast.LENGTH_SHORT).show()
+            }
+        }
+        //TODO: note that an array starts at 0, need to fix
     }
+
+
 
      private fun aaa() {
-
-
         totalQuestions = questionArray.size
         if (questionNumber < questionArray.size){
             setUpPage()
             Log.d("quiz", "uhhhh")
 
-            if (submittedYet == false) {
-                btn_quiz_submitnext.setOnClickListener {
-                    //plays only if user has not submitted their answer for the current question yet
-
-                    highlightCorrectAnswer()
-                    highlightCurrentAnswerIfWrong()
-
-                    if (radio_quiz_1.isChecked && radio_quiz_1.text == questionArray[questionNumber].correctAnswer) {
-                        questionsCorrect++
-                        submittedYet = true
-                    } else if (radio_quiz_2.isChecked && radio_quiz_2.text == questionArray[questionNumber].correctAnswer) {
-                        questionsCorrect++
-                        submittedYet = true
-                    } else if (radio_quiz_3.isChecked && radio_quiz_3.text == questionArray[questionNumber].correctAnswer) {
-                        questionsCorrect++
-                        submittedYet = true
-                    } else if (radio_quiz_4.isChecked && radio_quiz_4.text == questionArray[questionNumber].correctAnswer) {
-                        questionsCorrect++
-                        submittedYet = true
-                    } else {
-                        Toast.makeText(this, "Please make a selection.", Toast.LENGTH_SHORT).show()
-                        return@setOnClickListener
-                    }
-                }
-            }
-
-            if (submittedYet == true) {
-                btn_quiz_submitnext.setOnClickListener {
-                    questionNumber++
-                    aaa()
-                }
-            }
         }
     }
 
     private fun setUpPage() {
+        isSomethingChecked = false
+
+        //set buttons to default colors and configurations - this is required when every new question shows up
+        btn_quiz_1.setBackgroundColor(Color.RED)
         txtview_quiz_questionnum.text = "Question $questionNumber"
         txtview_quiz_qtext.text = questionArray[questionNumber].actualQuestion
 
-        radio_quiz_1.text = questionArray[questionNumber].optionOne
-        radio_quiz_2.text = questionArray[questionNumber].optionTwo
-        radio_quiz_3.text = questionArray[questionNumber].optionThree
-        radio_quiz_4.text = questionArray[questionNumber].optionFour
+        btn_quiz_1.text = questionArray[questionNumber].optionOne
+        btn_quiz_2.text = questionArray[questionNumber].optionTwo
+        btn_quiz_3.text = questionArray[questionNumber].optionThree
+        btn_quiz_4.text = questionArray[questionNumber].optionFour
     }
 
     //also changes color of submit button
-    private fun highlightCurrentAnswerIfWrong() {
+    /*private fun highlightCurrentAnswerIfWrong() {
         if (radio_quiz_1.isChecked && radio_quiz_1.text != questionArray[questionNumber].correctAnswer){
             btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
             radio_quiz_1.setBackgroundColor(Color.RED)
@@ -124,38 +135,47 @@ class QuizActivity : AppCompatActivity() {
             btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
             radio_quiz_4.setBackgroundColor(Color.RED)
         }
-    }
+    }*/
 
     private fun highlightCorrectAnswer() {
-        if (radio_quiz_1.text == questionArray[questionNumber].correctAnswer){
-            radio_quiz_1.setBackgroundColor(Color.GREEN)
+        if (btn_quiz_1.text == questionArray[questionNumber].correctAnswer){
+            btn_quiz_1.setBackgroundColor(Color.GREEN)
         }
-        else if (radio_quiz_2.text == questionArray[questionNumber].correctAnswer){
-            radio_quiz_2.setBackgroundColor(Color.GREEN)
+        else if (btn_quiz_2.text == questionArray[questionNumber].correctAnswer){
+            btn_quiz_2.setBackgroundColor(Color.GREEN)
         }
-        else if (radio_quiz_3.text == questionArray[questionNumber].correctAnswer){
-            radio_quiz_3.setBackgroundColor(Color.GREEN)
+        else if (btn_quiz_3.text == questionArray[questionNumber].correctAnswer){
+            btn_quiz_3.setBackgroundColor(Color.GREEN)
         }
-        else if (radio_quiz_4.text == questionArray[questionNumber].correctAnswer){
-            radio_quiz_4.setBackgroundColor(Color.GREEN)
+        else if (btn_quiz_4.text == questionArray[questionNumber].correctAnswer){
+            btn_quiz_4.setBackgroundColor(Color.GREEN)
         }
     }
 
-    private fun listenForQuestions(){
+    fun listenForQuestions(){
 
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("MM")
         val formatted = current.format(formatter)
         val currentMonth = QuizActivity.months[formatted.toInt()]
-
+        var count = 0
+        var numberOfQuestions = 0
         val ref = FirebaseDatabase.getInstance().getReference("/quizzes/$currentMonth")
 
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val questionItem = p0.getValue(Question::class.java)
 
+                //adding the individual questions to the array of questions
                 if (questionItem != null) {
                     questionArray += questionItem
+                    count++
+
+                    //after all of the questions for this node are gathered, do this
+                    if (count >= 10) {
+                        doneCollecting = true
+                        aaa()
+                    }
 
                 }
             }
