@@ -14,6 +14,8 @@ class HomepageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
 
+        supportActionBar?.title = "Wildcats Against Bullying"
+
         verifyUserIsLoggedIn()
 
         val uid = FirebaseAuth.getInstance().uid
@@ -58,20 +60,24 @@ class HomepageActivity : AppCompatActivity() {
     }
 
     //renders the buttons that appear on the toolbar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.mymenu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+        when(item?.itemId) {
             R.id.menu_sign_out -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
+            R.id.menu_report -> {
+                val intent = Intent(this, ReportActivity::class.java)
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
-    }
-    //renders toolbar on top of screen
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.mymenu, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 }

@@ -6,7 +6,10 @@ import android.content.Intent
 import android.util.Log
 import android.R
 import android.net.Uri
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_music.*
 
 
@@ -19,8 +22,8 @@ class MusicActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(com.example.wabprojectredo.R.layout.activity_music)
 
-        //TODO: make these be dynamic somehow. Maybe pull the urls from the database,
-        //if i want to get fancy do a recycler view and have unlimited playlists
+        supportActionBar?.title = "Music"
+
         btn_music_spotify1.setOnClickListener {
             val url = "https://open.spotify.com/playlist/75ARDXD31P1pM0jtVmc8eZ"
             val i = Intent(Intent.ACTION_VIEW)
@@ -50,6 +53,27 @@ class MusicActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(com.example.wabprojectredo.R.menu.mymenu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            com.example.wabprojectredo.R.id.menu_sign_out -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            com.example.wabprojectredo.R.id.menu_report -> {
+                val intent = Intent(this, ReportActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
 

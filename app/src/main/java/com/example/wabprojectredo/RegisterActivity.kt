@@ -16,6 +16,8 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        supportActionBar?.title = "Register"
+
         btn_register_register.setOnClickListener {
             performRegister()
             //TODO: MAKE SURE USERNAMES ARE UNIQUE. this is automatically done with emails

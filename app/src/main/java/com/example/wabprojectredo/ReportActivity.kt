@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.example.wabprojectredo.classes.Report
@@ -20,7 +22,6 @@ import java.util.*
 class ReportActivity : AppCompatActivity() {
 //TODO: do the thing where you cant go back to the report page after you report
     //TODO: store reports by their own unique ID
-    //TODO: store reports by their own uniwue id, send email when report is made
 
 
     //TODO: set this global variable inside other function so i can put the url in the report that
@@ -34,6 +35,8 @@ class ReportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)
+
+        supportActionBar?.title = "Report"
 
         var anonIsChecked = false
 
@@ -181,4 +184,24 @@ class ReportActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.mymenu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.menu_sign_out -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            R.id.menu_report -> {
+                val intent = Intent(this, ReportActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
