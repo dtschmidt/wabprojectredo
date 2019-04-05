@@ -187,6 +187,9 @@ class QuizActivity : AppCompatActivity() {
     }
 
     fun listenForQuestions(){
+        var questionArrayList = emptyList<Question>()
+        var questionArrayListShuffled = emptyList<Question>()
+        var questionArrayListFinal = emptyList<Question>()
 
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("MM")
@@ -208,6 +211,13 @@ class QuizActivity : AppCompatActivity() {
                     //after all of the questions for this node are gathered, do this
                     if (count >= 10) {
                         doneCollecting = true
+
+                        //convert the array of questions to a list, randomize them, get the first 5 and turn back into an array
+                        questionArrayList = questionArray.toMutableList()
+                        questionArrayListShuffled = questionArrayList.shuffled()
+                        questionArrayListFinal = questionArrayListShuffled.take(5)
+                        questionArray = questionArrayListFinal.toTypedArray()
+
                         aaa()
                     }
 

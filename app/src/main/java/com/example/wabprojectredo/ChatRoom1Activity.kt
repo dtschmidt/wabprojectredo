@@ -46,7 +46,7 @@ class ChatRoom1Activity : AppCompatActivity() {
 
         supportActionBar?.title = "Chat Room 1"
 
-        recyclerview_messages.adapter = adapter
+        recyclerview_cr1_messages.adapter = adapter
         //setupDummyData()
         listenForMessages()
 
@@ -91,7 +91,7 @@ class ChatRoom1Activity : AppCompatActivity() {
                 }
 
                 //sets screen to view recent messages first
-                recyclerview_messages.scrollToPosition(adapter.itemCount - 1)
+                recyclerview_cr1_messages.scrollToPosition(adapter.itemCount - 1)
             }
 
 
