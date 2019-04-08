@@ -15,13 +15,13 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_quiz.*
+import kotlinx.android.synthetic.main.activity_survey.*
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-class QuizActivity : AppCompatActivity() {
+class SurveyActivity : AppCompatActivity() {
 
     companion object {
 
@@ -32,8 +32,6 @@ class QuizActivity : AppCompatActivity() {
         val months = arrayOf("null", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december")
 
         var questionNumber = 1
-
-        var questionsCorrect = 0
 
         var totalQuestions = 0
 
@@ -48,86 +46,36 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        supportActionBar?.title = "Quiz"
+        supportActionBar?.title = "Survey"
 
         resetVaiables()
         listenForQuestions()
 
-        btn_quiz_1.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
-            isSomethingChecked = true
+        btn_survey_1.setOnClickListener {
 
-            //if option 1 is selected, but is wrong
-            if (btn_quiz_1.text != questionArray[questionNumber - 1].correctAnswer){
-                highlightCorrectAnswer()
-                btn_quiz_1.setBackgroundColor(Color.RED)
-                btn_quiz_submitnext.text = "NEXT"
-            }
-            //if option 1 is selected, and is correct
-            else if (btn_quiz_1.text == questionArray[questionNumber - 1].correctAnswer){
-                questionsCorrect++
-                btn_quiz_1.setBackgroundColor(Color.GREEN)
-                btn_quiz_submitnext.text = "NEXT"
-            }
+            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
+            btn_survey_1.setBackgroundColor(Color.BLUE)
+            isSomethingChecked = true
         }
 
-        btn_quiz_2.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+        btn_survey_2.setOnClickListener {
+            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
+            btn_survey_2.setBackgroundColor(Color.BLUE)
             isSomethingChecked = true
-
-            //if option 2 is selected, but is wrong
-            if (btn_quiz_2.text != questionArray[questionNumber - 1].correctAnswer){
-                highlightCorrectAnswer()
-                btn_quiz_2.setBackgroundColor(Color.RED)
-                btn_quiz_submitnext.text = "NEXT"
-            }
-
-            //if option 2 is selected, and is correct
-            else if (btn_quiz_2.text == questionArray[questionNumber - 1].correctAnswer){
-                questionsCorrect++
-                btn_quiz_2.setBackgroundColor(Color.GREEN)
-                btn_quiz_submitnext.text = "NEXT"
-            }
         }
 
-        btn_quiz_3.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+        btn_survey_3.setOnClickListener {
+            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
+            btn_survey_3.setBackgroundColor(Color.BLUE)
             isSomethingChecked = true
-
-            //if option 3 is selected, but is wrong
-            if (btn_quiz_3.text != questionArray[questionNumber - 1].correctAnswer){
-                highlightCorrectAnswer()
-                btn_quiz_3.setBackgroundColor(Color.RED)
-                btn_quiz_submitnext.text = "NEXT"
-            }
-
-            //if option 3 is selected, and is correct
-            else if (btn_quiz_3.text == questionArray[questionNumber - 1].correctAnswer){
-                questionsCorrect++
-                btn_quiz_3.setBackgroundColor(Color.GREEN)
-                btn_quiz_submitnext.text = "NEXT"
-            }
         }
 
-        btn_quiz_4.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+        btn_survey_4.setOnClickListener {
+            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
+            btn_survey_4.setBackgroundColor(Color.BLUE)
             isSomethingChecked = true
-
-            //if option 4 is selected, but is wrong
-            if (btn_quiz_4.text != questionArray[questionNumber - 1].correctAnswer){
-                highlightCorrectAnswer()
-                btn_quiz_4.setBackgroundColor(Color.RED)
-                btn_quiz_submitnext.text = "NEXT"
-            }
-
-            //if option 4 is selected, and is correct
-            else if (btn_quiz_4.text == questionArray[questionNumber - 1].correctAnswer){
-                questionsCorrect++
-                btn_quiz_4.setBackgroundColor(Color.GREEN)
-                btn_quiz_submitnext.text = "NEXT"
-            }
         }
-        btn_quiz_submitnext.setOnClickListener {
+        btn_survey_submitnext.setOnClickListener {
 
             //if the user has already selected their answer for current page & there are still questions remaining
             if (isSomethingChecked && questionNumber < questionArray.size) {
@@ -153,14 +101,13 @@ class QuizActivity : AppCompatActivity() {
         questionArray = emptyQuestionArray
 
         questionNumber = 1
-        questionsCorrect = 0
         totalQuestions = 0
         submittedYet = false
         doneCollecting = false
         isSomethingChecked = false
     }
 
-     private fun setTotalQsAndSetUpPage() {
+    private fun setTotalQsAndSetUpPage() {
         totalQuestions = questionArray.size
         if ((questionNumber - 1) < questionArray.size){
             setUpPage()
@@ -174,28 +121,28 @@ class QuizActivity : AppCompatActivity() {
 
         //set buttons to default colors and configurations - this is required when every new question shows up
 
-        txtview_quiz_questionnum.text = "Question $questionNumber)"
-        txtview_quiz_questionnum3.text = "$questionNumber / ${questionArray.size}"
-        txtview_quiz_qtext.text = questionArray[questionNumber - 1].actualQuestion
+        txtview_survey_questionnum.text = "Question $questionNumber)"
+        txtview_survey_questionnum3.text = "$questionNumber / ${questionArray.size}"
+        txtview_survey_qtext.text = questionArray[questionNumber - 1].actualQuestion
 
-        btn_quiz_1.text = questionArray[questionNumber - 1].option1
-        btn_quiz_2.text = questionArray[questionNumber - 1].option2
-        btn_quiz_3.text = questionArray[questionNumber - 1].option3
-        btn_quiz_4.text = questionArray[questionNumber - 1].option4
+        btn_survey_1.text = questionArray[questionNumber - 1].option1
+        btn_survey_2.text = questionArray[questionNumber - 1].option2
+        btn_survey_3.text = questionArray[questionNumber - 1].option3
+        btn_survey_4.text = questionArray[questionNumber - 1].option4
     }
 
     private fun highlightCorrectAnswer() {
-        if (btn_quiz_1.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_1.setBackgroundColor(Color.GREEN)
+        if (btn_survey_1.text == questionArray[questionNumber - 1].correctAnswer){
+            btn_survey_1.setBackgroundColor(Color.GREEN)
         }
-        else if (btn_quiz_2.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_2.setBackgroundColor(Color.GREEN)
+        else if (btn_survey_2.text == questionArray[questionNumber - 1].correctAnswer){
+            btn_survey_2.setBackgroundColor(Color.GREEN)
         }
-        else if (btn_quiz_3.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_3.setBackgroundColor(Color.GREEN)
+        else if (btn_survey_3.text == questionArray[questionNumber - 1].correctAnswer){
+            btn_survey_3.setBackgroundColor(Color.GREEN)
         }
-        else if (btn_quiz_4.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_4.setBackgroundColor(Color.GREEN)
+        else if (btn_survey_4.text == questionArray[questionNumber - 1].correctAnswer){
+            btn_survey_4.setBackgroundColor(Color.GREEN)
         }
     }
 
@@ -211,7 +158,7 @@ class QuizActivity : AppCompatActivity() {
         val currentMonth = QuizActivity.months[formatted.toInt()]
         var count = 0
         var numberOfQuestions = 0
-        val ref = FirebaseDatabase.getInstance().getReference("/quizzes/$currentMonth")
+        val ref = FirebaseDatabase.getInstance().getReference("/survey")
 
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -227,10 +174,10 @@ class QuizActivity : AppCompatActivity() {
                         doneCollecting = true
 
                         //convert the array of questions to a list, randomize them, get the first 5 and turn back into an array
-                        questionArrayList = questionArray.toMutableList()
-                        questionArrayListShuffled = questionArrayList.shuffled()
-                        questionArrayListFinal = questionArrayListShuffled.take(5)
-                        questionArray = questionArrayListFinal.toTypedArray()
+                        //questionArrayList = questionArray.toMutableList()
+                        //questionArrayListShuffled = questionArrayList.shuffled()
+                        //questionArrayListFinal = questionArrayListShuffled.take(5)
+                        //questionArray = questionArrayListFinal.toTypedArray()
 
                         setTotalQsAndSetUpPage()
                     }
@@ -258,11 +205,11 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun resetButtonColors() {
-        btn_quiz_1.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_2.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_3.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_4.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_submitnext.setBackgroundResource(android.R.drawable.btn_default)
+        btn_survey_1.setBackgroundResource(android.R.drawable.btn_default)
+        btn_survey_2.setBackgroundResource(android.R.drawable.btn_default)
+        btn_survey_3.setBackgroundResource(android.R.drawable.btn_default)
+        btn_survey_4.setBackgroundResource(android.R.drawable.btn_default)
+        btn_survey_submitnext.setBackgroundResource(android.R.drawable.btn_default)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

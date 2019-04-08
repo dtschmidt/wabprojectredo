@@ -1,11 +1,11 @@
 package com.example.wabprojectredo.classes
 
 class Question(val actualQuestion:String,
-            val optionOne:String,
-           val optionTwo:String,
-           val optionThree:String?,
-           val optionFour:String?,
-           val correctAnswer:String){
+            val option1:String,
+           val option2:String,
+           val option3:String?,
+           val option4:String?,
+           val correctAnswer:String?){
 
     constructor() : this("","","","","", "")
 }

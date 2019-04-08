@@ -1,4 +1,4 @@
 package com.example.wabprojectredo.classes
 
-class Report(val uid: String, val reportid: String, val email: String?, val name: String?, val date: String, val description:String, val imageurl: String?) {
+class Report(val timestamp: Long, val uid: String, val reportid: String, val email: String?, val name: String?, val date: String, val description:String, val imageurl: String?, val handledYet:String) {
 }

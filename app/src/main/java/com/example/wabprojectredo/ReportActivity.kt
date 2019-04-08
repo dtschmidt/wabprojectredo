@@ -138,12 +138,17 @@ class ReportActivity : AppCompatActivity() {
         val enteredDate = txt_report_date.text.toString()
         val enteredDescription = txt_report_description.text.toString()
 
+        /*inverseTimestamp subtracts the current time from a much longer number in
+        order to sort reports by most recent first in the firebase console*/
+        val inverseTimestamp = ( 3000000000000 - System.currentTimeMillis())
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val reportid = UUID.randomUUID().toString()
         val email = FirebaseAuth.getInstance().currentUser?.email
         val imageurl = imageDownloadUrl
-        val ref = FirebaseDatabase.getInstance().getReference("/reports/$uid/$reportid")
-        val report = Report(uid, reportid, email, enteredName, enteredDate, enteredDescription, imageurl)
+        val handledYet = "no"
+        val ref = FirebaseDatabase.getInstance().getReference("/reports/$inverseTimestamp")
+
+        val report = Report(inverseTimestamp, uid, reportid, email, enteredName, enteredDate, enteredDescription, imageurl, handledYet)
 
         //what actually uploads the report to the database
         ref.setValue(report)

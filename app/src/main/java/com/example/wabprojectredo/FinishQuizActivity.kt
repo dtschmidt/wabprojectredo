@@ -19,7 +19,7 @@ class FinishQuizActivity : AppCompatActivity() {
         txtview_quizfinish_score.text = "${QuizActivity.questionsCorrect} / ${QuizActivity.totalQuestions}"
 
         btn_finishquiz_finish.setOnClickListener {
-            val intent = Intent(this, GamesActivity::class.java)
+            val intent = Intent(this, HomepageActivity::class.java)
             startActivity(intent)
 
 
