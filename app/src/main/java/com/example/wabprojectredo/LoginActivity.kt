@@ -1,20 +1,35 @@
 package com.example.wabprojectredo
 
+import android.app.Dialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+//TODO: need forgot password thing
+
+    internal lateinit var forgotPassword : TextView
+    internal lateinit var popup: Dialog
+    internal lateinit var nevermind: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         supportActionBar?.title= "Login"
+
+        forgotPassword = findViewById<View>(R.id.txtview_login_forgotpassword) as TextView
+        forgotPassword.setOnClickListener {
+            showDialog()
+        }
 
         btn_main_login.setOnClickListener {
             performLogin()
@@ -26,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+
+
+
     }
 
     private fun performLogin(){
@@ -67,4 +86,19 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to login user: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
+    private fun showDialog() {
+        popup = Dialog(this)
+        popup.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        popup.setContentView(R.layout.forgot_password_popup)
+        popup.setTitle("Forgot Password")
+
+        nevermind = popup.findViewById<View>(R.id.btn_popup_nevermind) as Button
+        nevermind.isEnabled = true
+        nevermind.setOnClickListener {
+            popup.cancel()
+        }
+        popup.show()
+    }
+
 }

@@ -16,7 +16,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_quiz.*
-import kotlinx.coroutines.*
 import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -50,7 +49,7 @@ class QuizActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Quiz"
 
-        resetVaiables()
+        resetVariables()
         listenForQuestions()
 
         btn_quiz_1.setOnClickListener {
@@ -148,7 +147,7 @@ class QuizActivity : AppCompatActivity() {
         //TODO: note that an array starts at 0, need to fix
     }
 
-    private fun resetVaiables() {
+    private fun resetVariables() {
         val emptyQuestionArray = emptyArray<Question>()
         questionArray = emptyQuestionArray
 
@@ -178,6 +177,7 @@ class QuizActivity : AppCompatActivity() {
         txtview_quiz_questionnum3.text = "$questionNumber / ${questionArray.size}"
         txtview_quiz_qtext.text = questionArray[questionNumber - 1].actualQuestion
 
+        //setting the text of the buttons to be the answer choices
         btn_quiz_1.text = questionArray[questionNumber - 1].option1
         btn_quiz_2.text = questionArray[questionNumber - 1].option2
         btn_quiz_3.text = questionArray[questionNumber - 1].option3
@@ -200,7 +200,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     //this method is only called once
-    fun listenForQuestions(){
+    private fun listenForQuestions(){
         var questionArrayList = emptyList<Question>()
         var questionArrayListShuffled = emptyList<Question>()
         var questionArrayListFinal = emptyList<Question>()

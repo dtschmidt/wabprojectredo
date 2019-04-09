@@ -12,17 +12,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_games.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class GamesActivity : AppCompatActivity() {
-
-    companion object {
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +24,14 @@ class GamesActivity : AppCompatActivity() {
         supportActionBar?.title = "Games"
 
         btn_games_quiz.setOnClickListener {
-
             val intent = Intent(this, QuizActivity::class.java)
             startActivity(intent)
-
         }
+
+        /*btn_games_survey.setOnClickListener {
+            val intent = Intent(this, SurveyActivity::class.java)
+            startActivity(intent)
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_homepage.*
 
 class HomepageActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
@@ -40,7 +39,7 @@ class HomepageActivity : AppCompatActivity() {
         }
 
         btn_homepage_report.setOnClickListener {
-            val intent = Intent(this, ReportActivity::class.java)
+            val intent = Intent(this, BeforeReportActivity::class.java)
             startActivity(intent)
         }
 
