@@ -73,7 +73,7 @@ class ChatRoom1Activity : AppCompatActivity() {
 
     private fun listenForMessages(){
         //orderbychild orders the posts by their timestamps. limittolast gets the most recent 100 posts based on that order
-        val ref = FirebaseDatabase.getInstance().getReference("/messages/ChatRoom1").orderByChild("longtimestamp").limitToLast(100)
+        val ref = FirebaseDatabase.getInstance().getReference("/chats/physicalbullyingchatroom")/*TODO.orderByChild("longtimestamp")*/.limitToLast(100)
 
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -83,11 +83,11 @@ class ChatRoom1Activity : AppCompatActivity() {
                     Log.d(TAG, chatMessage?.text)
 
                     //if the sender of the message is the logged in user, display it as such
-                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid)
-                        adapter.add(ChatToItem(chatMessage?.text, chatMessage?.fromUsername, chatMessage.timestamp))
+                    if (chatMessage.sender_id == FirebaseAuth.getInstance().currentUser?.email)
+                        adapter.add(ChatToItem(chatMessage?.text, chatMessage?.name, chatMessage?.timestamp))
                     //else display it as a message from another person
                     else
-                        adapter.add(ChatFromItem(chatMessage?.text, chatMessage?.fromUsername, chatMessage.timestamp))
+                        adapter.add(ChatFromItem(chatMessage?.text, chatMessage?.name, chatMessage?.timestamp))
                 }
 
                 //sets screen to view recent messages first
@@ -116,43 +116,51 @@ class ChatRoom1Activity : AppCompatActivity() {
     private fun performSendMessage(){
         val text = edittxt_cr1_messageentry.text.toString()
 
-        //check each message for profanity
+        //prevents user from sending empty messages up to 3 spaces
+        if (text != "" && text != " " && text != "   ") {
 
-        //since the list of profanity is all lower case, convert to lowercase in
-        //order to check against it
-        val textlower = text.toLowerCase()
-        val delimiter = " "
-        val split = textlower.split(delimiter)
+            //check each message for profanity
+            /*since the list of profanity is all lower case, convert to lowercase in
+            order to check against it*/
+            val textlower = text.toLowerCase()
+            val delimiter = " "
+            val split = textlower.split(delimiter)
 
-        //checks intersection of user's input vs list of profane words
-        var intersection = split.intersect(profanity.toList()).toTypedArray()
-        if (intersection.isNotEmpty()) {
-            Toast.makeText(this, "Profanity detected. Please rephrase your message.", Toast.LENGTH_SHORT).show()
+            //checks intersection of user's input vs list of profane words
+            var intersection = split.intersect(profanity.toList()).toTypedArray()
+            if (intersection.isNotEmpty()) {
+                Toast.makeText(this, "Profanity detected. Please rephrase your message.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+
+            //get id and display name from current user
+            val instance = FirebaseAuth.getInstance()
+            val sender_id = instance.currentUser?.email
+            val name = instance.currentUser?.displayName
+
+            //get current time
+            val currentTime = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("HH:mm")
+            val currentTimeFormatted = currentTime.format(formatter).toString()
+
+
+            if (sender_id == null) return
+
+            val reference = FirebaseDatabase.getInstance().getReference("/chats/physicalbullyingchatroom").push()
+
+            val chatMessage = ChatMessage(text, sender_id, name, currentTimeFormatted)
+            reference.setValue(chatMessage)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Chat message saved in database: ${reference.key}")
+                    edittxt_cr1_messageentry.text.clear()
+                }
+        }
+        else {
+            Toast.makeText(this, "Type a message first!", Toast.LENGTH_SHORT).show()
             return
         }
 
-
-        //get id and display name from current user
-        val instance = FirebaseAuth.getInstance()
-        val fromId = instance.currentUser?.uid
-        val fromUsername = instance.currentUser?.displayName
-
-        //get current time
-        val currentTime = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("HH:mm")
-        val currentTimeFormatted = currentTime.format(formatter).toString()
-
-
-        if (fromId == null) return
-
-        val reference = FirebaseDatabase.getInstance().getReference("/messages/ChatRoom1").push()
-
-        val chatMessage = ChatMessage(reference.key!!, text, fromId, fromUsername, roomName, currentTimeFormatted, System.currentTimeMillis())
-        reference.setValue(chatMessage)
-            .addOnSuccessListener {
-                Log.d(TAG, "Chat message saved in database: ${reference.key}")
-                edittxt_cr1_messageentry.text.clear()
-            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -20,15 +20,11 @@ import kotlinx.android.synthetic.main.activity_report.*
 import java.util.*
 
 class ReportActivity : AppCompatActivity() {
-//TODO: do the thing where you cant go back to the report page after you report
-    //TODO: store reports by their own unique ID
+    companion object {
 
-
-    //TODO: set this global variable inside other function so i can put the url in the report that
-    //goes to the database
-    object urlobject {
-        var imageDownloadUrl = ""
     }
+
+    var reportKey: String? = ""
     var isInDatabase: Boolean = false
     var imageDownloadUrl: String? = ""
 
@@ -44,7 +40,7 @@ class ReportActivity : AppCompatActivity() {
         //takes away "name" field if anonymous is checked
         switch_report_anon.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
-                txt_report_name.visibility = View.INVISIBLE
+                txt_report_name.visibility = View.GONE
                 anonIsChecked = true
             }
             else{
@@ -101,11 +97,10 @@ class ReportActivity : AppCompatActivity() {
             putReportInDatabase()
         }
 
-        //TODO
-        //Go to links page after submission
         val intent = Intent(this, LinksActivity::class.java)
         //Tell links page to show thank you message
         intent.putExtra("showThankYou", true)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
 
 
@@ -118,9 +113,8 @@ class ReportActivity : AppCompatActivity() {
         //If theres nothing to put in database, exit out of function
         if (selectedPhotoUri == null) return
 
-        val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/reportimages/$filename")
-
+        val filename = FirebaseAuth.getInstance().currentUser?.uid + "----------" + UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("$filename")
         ref.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
 
@@ -146,8 +140,8 @@ class ReportActivity : AppCompatActivity() {
         val email = FirebaseAuth.getInstance().currentUser?.email
         val imageurl = imageDownloadUrl
         val handledYet = "no"
-        val ref = FirebaseDatabase.getInstance().getReference("/reports/$inverseTimestamp")
-
+        val ref = FirebaseDatabase.getInstance().getReference("/reports").push() ///$inverseTimestamp
+        reportKey = ref.key
         val report = Report(inverseTimestamp, uid, reportid, email, enteredName, enteredDate, enteredDescription, imageurl, handledYet)
 
         //what actually uploads the report to the database
@@ -158,8 +152,6 @@ class ReportActivity : AppCompatActivity() {
                     this, "Successfully sumbmitted report. Thank you.",
                     Toast.LENGTH_SHORT
                 ).show()
-
-
             }
             .addOnFailureListener() {
                 Log.d("ReportActivity", "Failed to save report: ${it.message}")

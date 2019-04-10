@@ -28,6 +28,11 @@ class GamesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btn_games_survey.setOnClickListener {
+            val intent = Intent(this, SurveyActivity::class.java)
+            startActivity(intent)
+        }
+
         /*btn_games_survey.setOnClickListener {
             val intent = Intent(this, SurveyActivity::class.java)
             startActivity(intent)

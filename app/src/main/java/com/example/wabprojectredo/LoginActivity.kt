@@ -100,5 +100,4 @@ class LoginActivity : AppCompatActivity() {
         }
         popup.show()
     }
-
 }

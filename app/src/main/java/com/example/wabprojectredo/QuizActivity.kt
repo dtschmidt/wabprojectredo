@@ -56,6 +56,12 @@ class QuizActivity : AppCompatActivity() {
             btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
             isSomethingChecked = true
 
+            //disable the buttons
+            btn_quiz_1.isEnabled = false
+            btn_quiz_2.isEnabled = false
+            btn_quiz_3.isEnabled = false
+            btn_quiz_4.isEnabled = false
+
             //if option 1 is selected, but is wrong
             if (btn_quiz_1.text != questionArray[questionNumber - 1].correctAnswer){
                 highlightCorrectAnswer()
@@ -73,6 +79,12 @@ class QuizActivity : AppCompatActivity() {
         btn_quiz_2.setOnClickListener {
             btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
             isSomethingChecked = true
+
+            //disable the buttons
+            btn_quiz_1.isEnabled = false
+            btn_quiz_2.isEnabled = false
+            btn_quiz_3.isEnabled = false
+            btn_quiz_4.isEnabled = false
 
             //if option 2 is selected, but is wrong
             if (btn_quiz_2.text != questionArray[questionNumber - 1].correctAnswer){
@@ -93,6 +105,12 @@ class QuizActivity : AppCompatActivity() {
             btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
             isSomethingChecked = true
 
+            //disable the buttons
+            btn_quiz_1.isEnabled = false
+            btn_quiz_2.isEnabled = false
+            btn_quiz_3.isEnabled = false
+            btn_quiz_4.isEnabled = false
+
             //if option 3 is selected, but is wrong
             if (btn_quiz_3.text != questionArray[questionNumber - 1].correctAnswer){
                 highlightCorrectAnswer()
@@ -111,6 +129,12 @@ class QuizActivity : AppCompatActivity() {
         btn_quiz_4.setOnClickListener {
             btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
             isSomethingChecked = true
+
+            //disable the buttons
+            btn_quiz_1.isEnabled = false
+            btn_quiz_2.isEnabled = false
+            btn_quiz_3.isEnabled = false
+            btn_quiz_4.isEnabled = false
 
             //if option 4 is selected, but is wrong
             if (btn_quiz_4.text != questionArray[questionNumber - 1].correctAnswer){
@@ -132,6 +156,12 @@ class QuizActivity : AppCompatActivity() {
             if (isSomethingChecked && questionNumber < questionArray.size) {
                 questionNumber++
                 setTotalQsAndSetUpPage()
+
+                //reenable the buttons
+                btn_quiz_1.isEnabled = true
+                btn_quiz_2.isEnabled = true
+                btn_quiz_3.isEnabled = true
+                btn_quiz_4.isEnabled = true
             }
 
             //if all questions have been answered, finish the quiz
@@ -234,25 +264,12 @@ class QuizActivity : AppCompatActivity() {
 
                         setTotalQsAndSetUpPage()
                     }
-
                 }
             }
-
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-
-            }
-
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
+            override fun onChildRemoved(p0: DataSnapshot) {}
         })
         return
     }

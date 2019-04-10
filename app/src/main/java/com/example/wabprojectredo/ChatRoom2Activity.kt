@@ -84,11 +84,11 @@ class ChatRoom2Activity : AppCompatActivity() {
                     Log.d(TAG, chatMessage?.text)
 
                     //if the sender of the message is the logged in user, display it as such
-                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid)
-                        adapter.add(ChatToItem(chatMessage?.text, chatMessage?.fromUsername, chatMessage.timestamp))
+                    if (chatMessage.sender_id == FirebaseAuth.getInstance().uid)
+                        adapter.add(ChatToItem(chatMessage?.text, chatMessage?.name, chatMessage.timestamp))
                     //else display it as a message from another person
                     else
-                        adapter.add(ChatFromItem(chatMessage?.text, chatMessage?.fromUsername, chatMessage.timestamp))
+                        adapter.add(ChatFromItem(chatMessage?.text, chatMessage?.name, chatMessage.timestamp))
                 }
 
                 //sets screen to view recent messages first
@@ -135,20 +135,20 @@ class ChatRoom2Activity : AppCompatActivity() {
 
         //get id and display name from current user
         val instance = FirebaseAuth.getInstance()
-        val fromId = instance.currentUser?.uid
-        val fromUsername = instance.currentUser?.displayName
-
+        val sender_id = instance.currentUser?.uid
+        val name = instance.currentUser?.displayName
+//TODO: this
         //get current time
         val currentTime = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         val currentTimeFormatted = currentTime.format(formatter).toString()
 
 
-        if (fromId == null) return
+        if (sender_id == null) return
 
         val reference = FirebaseDatabase.getInstance().getReference("/messages/ChatRoom2").push()
 
-        val chatMessage = ChatMessage(reference.key!!, text, fromId, fromUsername, roomName, currentTimeFormatted, System.currentTimeMillis())
+        val chatMessage = ChatMessage(text, sender_id, name,currentTimeFormatted)
         reference.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "Chat message saved in database: ${reference.key}")

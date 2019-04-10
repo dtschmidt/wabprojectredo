@@ -8,7 +8,12 @@ import android.widget.Toast
 import com.example.wabprojectredo.classes.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.internal.api.FirebaseNoSignedInUserException
 import kotlinx.android.synthetic.main.activity_register.*
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.FirebaseUser
+
+
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -20,7 +25,6 @@ class RegisterActivity : AppCompatActivity() {
 
         btn_register_register.setOnClickListener {
             performRegister()
-            //TODO: MAKE SURE USERNAMES ARE UNIQUE. this is automatically done with emails
         }
 
         btn_register_backToLogin.setOnClickListener {
@@ -33,10 +37,20 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun performRegister(){
         val enteredEmail = txt_register_emailEntry.text.toString()
-        val enteredPassword = txt_register_passwordConfirm.text.toString()
+        var enteredPassword:String
 
-        if (enteredEmail.isEmpty() || enteredPassword.isEmpty()){
-            Toast.makeText(this, "Please enter an email and password.", Toast.LENGTH_SHORT).show()
+        //if/else statement makes sure password and confirmPassword are the same
+        if (txt_register_passwordEntry.text.toString() == txt_register_passwordConfirm.text.toString())
+            enteredPassword = txt_register_passwordConfirm.text.toString()
+        else {
+            Toast.makeText(this, "Make sure your password entries match.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val enteredName = txt_register_usernameEntry.text.toString()
+
+        if (enteredEmail.isEmpty() || enteredPassword.isEmpty() || enteredName.isEmpty()){
+            Toast.makeText(this, "Please enter an en email, password, and display name.", Toast.LENGTH_SHORT).show()
             return
         }
         // TODO else if (!enteredEmail.contains("bhm.k12.al.us")){
@@ -46,21 +60,38 @@ class RegisterActivity : AppCompatActivity() {
 
         Log.d("LoginActivity", "Email is: $enteredEmail")
         Log.d("LoginActivity", "Password is: $enteredPassword")
+        Log.d("LoginActivity", "Name is: $enteredName")
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(enteredEmail, enteredPassword)
             .addOnCompleteListener{
                 if (!it.isSuccessful) return@addOnCompleteListener
 
-                saveUserToFirebaseDatabase()
+                //saveUserToFirebaseDatabase()
                 //else if successful
                 Log.d("Register", "Successfully created user with uid: ${it.result?.user?.uid}")
                 //send email to verify user
-                //TODO: uncomment below code and test with ms. bieri's email
                 FirebaseAuth.getInstance().currentUser?.sendEmailVerification()
                     ?.addOnSuccessListener {
+
+                        //send user back to login page if they successfully sent registration email
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                        ///////////////////////////////////////////////////////////////////////////
+
                         Log.d("Register", "Sent email verificaiton email.")
                         Toast.makeText(this, "Verification email has been sent to your inbox. Click the" +
                                 " link in the email to be able to log in.", Toast.LENGTH_SHORT).show()
+
+                        //this block of code sets the user's display name
+                        //TODO: one could probably change their display name by doing registration again, need to check and fix
+                        val user = FirebaseAuth.getInstance().currentUser
+
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                            .setDisplayName(enteredName).build()
+
+                        user?.updateProfile(profileUpdates)
+                        //////////////////////////////////////////////////
+
                     }
                     ?.addOnFailureListener{
                         Log.d("Register", "Verification email sending failed.")
@@ -76,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun saveUserToFirebaseDatabase(){
+    /*private fun saveUserToFirebaseDatabase(){
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
@@ -93,7 +124,7 @@ class RegisterActivity : AppCompatActivity() {
             .addOnFailureListener{
                 Log.d("Register", "Failed to save user to database: ${it.message}")
             }
-    }
+    }*/
 }
 
 
