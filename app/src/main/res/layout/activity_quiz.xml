@@ -21,7 +21,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/btn_quiz_submitnext" android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"/>
     <TextView
-            android:text="Question Description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/txtview_quiz_qtext"
@@ -31,7 +30,6 @@
             app:layout_constraintTop_toBottomOf="@+id/txtview_quiz_questionnum"
             android:textColor="@color/colorPrimaryDark"/>
     <TextView
-            android:text="Question Text"
             android:layout_width="0dp"
             android:layout_height="59dp"
             android:id="@+id/txtview_quiz_questionnum" app:layout_constraintEnd_toEndOf="parent"
@@ -53,25 +51,21 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/txtview_quiz_qtext" android:layout_margin="32dp">
         <Button
-                android:text="option 1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundedbuttonwhite"
                 android:id="@+id/btn_quiz_1" android:elevation="5dp"/>
         <Button
-                android:text="option 2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundedbuttonwhite"
                 android:id="@+id/btn_quiz_2" android:layout_marginTop="8dp" android:elevation="5dp"/>
         <Button
-                android:text="option 3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundedbuttonwhite"
                 android:id="@+id/btn_quiz_3" android:layout_marginTop="8dp" android:elevation="5dp"/>
         <Button
-                android:text="option 4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundedbuttonwhite"

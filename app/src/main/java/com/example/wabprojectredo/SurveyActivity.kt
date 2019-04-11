@@ -59,8 +59,8 @@ class SurveyActivity : AppCompatActivity() {
         listenForResults()
 
         btn_survey_1.setOnClickListener {
-            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
-            btn_survey_1.setBackgroundColor(Color.BLUE)
+            btn_survey_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
+            btn_survey_1.setBackgroundResource(R.drawable.roundedbuttonblue)
             btn_survey_submitnext.text = "NEXT"
             isSomethingChecked = true
 
@@ -80,8 +80,8 @@ class SurveyActivity : AppCompatActivity() {
         }
 
         btn_survey_2.setOnClickListener {
-            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
-            btn_survey_2.setBackgroundColor(Color.BLUE)
+            btn_survey_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
+            btn_survey_2.setBackgroundResource(R.drawable.roundedbuttonblue)
             btn_survey_submitnext.text = "NEXT"
             isSomethingChecked = true
 
@@ -101,8 +101,8 @@ class SurveyActivity : AppCompatActivity() {
         }
 
         btn_survey_3.setOnClickListener {
-            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
-            btn_survey_3.setBackgroundColor(Color.BLUE)
+            btn_survey_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
+            btn_survey_3.setBackgroundResource(R.drawable.roundedbuttonblue)
             btn_survey_submitnext.text = "NEXT"
             isSomethingChecked = true
 
@@ -119,8 +119,8 @@ class SurveyActivity : AppCompatActivity() {
         }
 
         btn_survey_4.setOnClickListener {
-            btn_survey_submitnext.setBackgroundColor(Color.BLUE)
-            btn_survey_4.setBackgroundColor(Color.BLUE)
+            btn_survey_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
+            btn_survey_4.setBackgroundResource(R.drawable.roundedbuttonblue)
             btn_survey_submitnext.text = "NEXT"
             isSomethingChecked = true
 
@@ -361,11 +361,11 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun resetButtonColors() {
-        btn_survey_1.setBackgroundResource(android.R.drawable.btn_default)
-        btn_survey_2.setBackgroundResource(android.R.drawable.btn_default)
-        btn_survey_3.setBackgroundResource(android.R.drawable.btn_default)
-        btn_survey_4.setBackgroundResource(android.R.drawable.btn_default)
-        btn_survey_submitnext.setBackgroundResource(android.R.drawable.btn_default)
+        btn_survey_1.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_survey_2.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_survey_3.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_survey_4.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_survey_submitnext.setBackgroundResource(R.drawable.roundedbuttonlightgrey)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
