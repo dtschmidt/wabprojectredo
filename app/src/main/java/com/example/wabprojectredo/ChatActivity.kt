@@ -26,6 +26,11 @@ class ChatActivity : AppCompatActivity() {
             val intent = Intent(this, ChatRoom2Activity::class.java)
             startActivity(intent)
         }
+
+        btn_chat_room3.setOnClickListener {
+            val intent = Intent(this, ChatRoom3Activity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
