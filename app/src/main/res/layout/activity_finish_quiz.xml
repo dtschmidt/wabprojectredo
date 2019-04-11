@@ -8,6 +8,15 @@
         android:background="@color/colorPrimary"
         tools:context=".FinishQuizActivity">
 
+    <Button
+            android:text="Resources"
+            android:layout_width="168dp"
+            android:layout_height="29dp"
+            android:background="@drawable/roundedbuttonwhite"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/btn_finishquiz_finish2" android:layout_marginBottom="72dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.497"
+            android:textColor="@color/colorAccent"/>
     <TextView
             android:text="/"
             android:layout_width="0dp"
@@ -55,8 +64,16 @@
             android:text="Finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_border"
+            android:background="@drawable/roundedbuttonwhite"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/btn_finishquiz_finish" android:layout_marginBottom="160dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:id="@+id/btn_finishquiz_finish"
+            app:layout_constraintHorizontal_bias="0.498" android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView"/>
+    <TextView
+            android:text="For More Information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/textView" android:textColor="@color/colorPrimaryDark" android:textStyle="bold"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/btn_finishquiz_finish2"/>
 </android.support.constraint.ConstraintLayout>

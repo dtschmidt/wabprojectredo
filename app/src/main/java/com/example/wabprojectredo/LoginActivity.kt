@@ -8,10 +8,12 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.forgot_password_popup.*
 
 class LoginActivity : AppCompatActivity() {
 //TODO: need forgot password thing
@@ -19,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
     internal lateinit var forgotPassword : TextView
     internal lateinit var popup: Dialog
     internal lateinit var nevermind: Button
+    internal lateinit var clickhere: Button
+    internal lateinit var email: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,9 +98,26 @@ class LoginActivity : AppCompatActivity() {
         popup.setTitle("Forgot Password")
 
         nevermind = popup.findViewById<View>(R.id.btn_popup_nevermind) as Button
+        clickhere = popup.findViewById<View>(R.id.btn_popup_clickhere) as Button
+        email = popup.findViewById<View>(R.id.txt_popup_email) as EditText
         nevermind.isEnabled = true
         nevermind.setOnClickListener {
             popup.cancel()
+        }
+        clickhere.setOnClickListener {
+            val auth = FirebaseAuth.getInstance()
+
+            auth.sendPasswordResetEmail(email.text.toString())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        popup.cancel()
+                        Log.d("LoginActivity", "Reset password email sent.")
+                        Toast.makeText(this, "Reset password email sent.", Toast.LENGTH_SHORT).show()
+                    }
+                    else
+                        Toast.makeText(this, "Did not send password reset email. Try entering your email again.", Toast.LENGTH_SHORT).show()
+                }
+
         }
         popup.show()
     }

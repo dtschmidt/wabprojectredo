@@ -3,7 +3,7 @@
     <item
             android:id="@+id/gameimage"
             android:drawable="@drawable/game"
-            android:width="64dp"
+            android:width="90dp"
             android:height="64dp"
 
     />

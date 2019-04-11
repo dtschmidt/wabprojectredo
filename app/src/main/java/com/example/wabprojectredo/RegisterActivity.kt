@@ -27,11 +27,6 @@ class RegisterActivity : AppCompatActivity() {
             performRegister()
         }
 
-        btn_register_backToLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-
 
     }
 

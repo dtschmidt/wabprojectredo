@@ -11,19 +11,21 @@
 
     <Button
             android:text="Monthly Quiz                                           >"
-            android:layout_width="424dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@android:color/white"
             android:id="@+id/btn_games_quiz"
             android:textSize="20sp" android:textAlignment="textStart" android:textColor="@color/colorAccent"
-            tools:layout_editor_absoluteY="177dp"/>
+            tools:layout_editor_absoluteY="177dp" android:paddingStart="8dp"/>
 
     <Button
-            android:layout_width="424dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@android:color/white"
             android:id="@+id/btn_games_survey"
             android:textSize="20sp" android:textAlignment="textStart" android:textColor="@color/colorAccent"
             tools:layout_editor_absoluteY="177dp" android:layout_marginTop="16dp"
-            android:text="MONTHLY SURVEY                                     >"/>
+            android:text="SURVEY                                                         >" android:paddingStart="8dp"/>
 
 </LinearLayout>
 

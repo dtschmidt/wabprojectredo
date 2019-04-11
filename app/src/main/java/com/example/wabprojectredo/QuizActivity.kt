@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -53,7 +54,7 @@ class QuizActivity : AppCompatActivity() {
         listenForQuestions()
 
         btn_quiz_1.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+            btn_quiz_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
             isSomethingChecked = true
 
             //disable the buttons
@@ -65,19 +66,19 @@ class QuizActivity : AppCompatActivity() {
             //if option 1 is selected, but is wrong
             if (btn_quiz_1.text != questionArray[questionNumber - 1].correctAnswer){
                 highlightCorrectAnswer()
-                btn_quiz_1.setBackgroundColor(Color.RED)
+                btn_quiz_1.setBackgroundResource(R.drawable.roundedbuttonred)
                 btn_quiz_submitnext.text = "NEXT"
             }
             //if option 1 is selected, and is correct
             else if (btn_quiz_1.text == questionArray[questionNumber - 1].correctAnswer){
                 questionsCorrect++
-                btn_quiz_1.setBackgroundColor(Color.GREEN)
+                btn_quiz_1.setBackgroundResource(R.drawable.roundedbuttongreen)
                 btn_quiz_submitnext.text = "NEXT"
             }
         }
 
         btn_quiz_2.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+            btn_quiz_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
             isSomethingChecked = true
 
             //disable the buttons
@@ -89,20 +90,20 @@ class QuizActivity : AppCompatActivity() {
             //if option 2 is selected, but is wrong
             if (btn_quiz_2.text != questionArray[questionNumber - 1].correctAnswer){
                 highlightCorrectAnswer()
-                btn_quiz_2.setBackgroundColor(Color.RED)
+                btn_quiz_2.setBackgroundResource(R.drawable.roundedbuttonred)
                 btn_quiz_submitnext.text = "NEXT"
             }
 
             //if option 2 is selected, and is correct
             else if (btn_quiz_2.text == questionArray[questionNumber - 1].correctAnswer){
                 questionsCorrect++
-                btn_quiz_2.setBackgroundColor(Color.GREEN)
+                btn_quiz_2.setBackgroundResource(R.drawable.roundedbuttongreen)
                 btn_quiz_submitnext.text = "NEXT"
             }
         }
 
         btn_quiz_3.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+            btn_quiz_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
             isSomethingChecked = true
 
             //disable the buttons
@@ -114,20 +115,20 @@ class QuizActivity : AppCompatActivity() {
             //if option 3 is selected, but is wrong
             if (btn_quiz_3.text != questionArray[questionNumber - 1].correctAnswer){
                 highlightCorrectAnswer()
-                btn_quiz_3.setBackgroundColor(Color.RED)
+                btn_quiz_3.setBackgroundResource(R.drawable.roundedbuttonred)
                 btn_quiz_submitnext.text = "NEXT"
             }
 
             //if option 3 is selected, and is correct
             else if (btn_quiz_3.text == questionArray[questionNumber - 1].correctAnswer){
                 questionsCorrect++
-                btn_quiz_3.setBackgroundColor(Color.GREEN)
+                btn_quiz_3.setBackgroundResource(R.drawable.roundedbuttongreen)
                 btn_quiz_submitnext.text = "NEXT"
             }
         }
 
         btn_quiz_4.setOnClickListener {
-            btn_quiz_submitnext.setBackgroundColor(Color.BLUE)
+            btn_quiz_submitnext.setBackgroundResource(R.drawable.roundedbuttonblue)
             isSomethingChecked = true
 
             //disable the buttons
@@ -139,14 +140,14 @@ class QuizActivity : AppCompatActivity() {
             //if option 4 is selected, but is wrong
             if (btn_quiz_4.text != questionArray[questionNumber - 1].correctAnswer){
                 highlightCorrectAnswer()
-                btn_quiz_4.setBackgroundColor(Color.RED)
+                btn_quiz_4.setBackgroundResource(R.drawable.roundedbuttonred)
                 btn_quiz_submitnext.text = "NEXT"
             }
 
             //if option 4 is selected, and is correct
             else if (btn_quiz_4.text == questionArray[questionNumber - 1].correctAnswer){
                 questionsCorrect++
-                btn_quiz_4.setBackgroundColor(Color.GREEN)
+                btn_quiz_4.setBackgroundResource(R.drawable.roundedbuttongreen)
                 btn_quiz_submitnext.text = "NEXT"
             }
         }
@@ -216,16 +217,16 @@ class QuizActivity : AppCompatActivity() {
 
     private fun highlightCorrectAnswer() {
         if (btn_quiz_1.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_1.setBackgroundColor(Color.GREEN)
+            btn_quiz_1.setBackgroundResource(R.drawable.roundedbuttongreen)
         }
         else if (btn_quiz_2.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_2.setBackgroundColor(Color.GREEN)
+            btn_quiz_2.setBackgroundResource(R.drawable.roundedbuttongreen)
         }
         else if (btn_quiz_3.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_3.setBackgroundColor(Color.GREEN)
+            btn_quiz_3.setBackgroundResource(R.drawable.roundedbuttongreen)
         }
         else if (btn_quiz_4.text == questionArray[questionNumber - 1].correctAnswer){
-            btn_quiz_4.setBackgroundColor(Color.GREEN)
+            btn_quiz_4.setBackgroundResource(R.drawable.roundedbuttongreen)
         }
     }
 
@@ -275,11 +276,11 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun resetButtonColors() {
-        btn_quiz_1.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_2.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_3.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_4.setBackgroundResource(android.R.drawable.btn_default)
-        btn_quiz_submitnext.setBackgroundResource(android.R.drawable.btn_default)
+        btn_quiz_1.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_quiz_2.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_quiz_3.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_quiz_4.setBackgroundResource(R.drawable.roundedbuttonwhite)
+        btn_quiz_submitnext.setBackgroundResource(R.drawable.roundedbuttonlightgrey)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

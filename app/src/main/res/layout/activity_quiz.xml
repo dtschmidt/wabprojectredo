@@ -42,7 +42,7 @@
             android:text="Submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_border"
+            android:background="@drawable/roundedbuttonlightgrey"
             android:id="@+id/btn_quiz_submitnext" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="32dp" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginRight="32dp"/>
@@ -55,18 +55,26 @@
         <Button
                 android:text="option 1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/btn_quiz_1"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedbuttonwhite"
+                android:id="@+id/btn_quiz_1" android:elevation="5dp"/>
         <Button
                 android:text="option 2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/btn_quiz_2"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedbuttonwhite"
+                android:id="@+id/btn_quiz_2" android:layout_marginTop="8dp" android:elevation="5dp"/>
         <Button
                 android:text="option 3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/btn_quiz_3"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedbuttonwhite"
+                android:id="@+id/btn_quiz_3" android:layout_marginTop="8dp" android:elevation="5dp"/>
         <Button
                 android:text="option 4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/btn_quiz_4"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedbuttonwhite"
+                android:id="@+id/btn_quiz_4" android:layout_marginTop="8dp" android:elevation="5dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
