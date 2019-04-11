@@ -1,9 +1,13 @@
 package com.example.wabprojectredo
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_before_report.*
+import android.widget.Toast
+
+
 
 class BeforeReportActivity : AppCompatActivity() {
 
