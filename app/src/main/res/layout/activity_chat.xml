@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical" android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/colorPrimary" android:id="@+id/linearLayout2" android:paddingTop="150dp">
+              android:background="@color/colorPrimary" android:id="@+id/linearLayout2" android:paddingTop="100dp">
 
     <Button
             android:text="Wildcat Chat                                          >"
@@ -11,7 +11,7 @@
             android:layout_height="60dp"
             android:id="@+id/btn_chat_room3"
             android:textSize="20sp" android:textAlignment="textStart" android:textColor="@color/colorAccent"
-            tools:layout_editor_absoluteY="177dp" android:layout_marginTop="16dp"/>
+            tools:layout_editor_absoluteY="177dp"/>
     <Button
             android:text="Cyberbullying                                        >"
             android:layout_width="match_parent"

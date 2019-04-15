@@ -73,7 +73,7 @@ class ChatRoom1Activity : AppCompatActivity() {
 
     private fun listenForMessages(){
         //orderbychild orders the posts by their timestamps. limittolast gets the most recent 100 posts based on that order
-        val ref = FirebaseDatabase.getInstance().getReference("/chats/physicalbullyingchatroom")/*TODO.orderByChild("longtimestamp")*/.limitToLast(100)
+        val ref = FirebaseDatabase.getInstance().getReference("/chats/physicalbullyingchatroom").limitToLast(100)
 
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {

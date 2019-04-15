@@ -175,7 +175,6 @@ class QuizActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please make a selection.", Toast.LENGTH_SHORT).show()
             }
         }
-        //TODO: note that an array starts at 0, need to fix
     }
 
     private fun resetVariables() {
