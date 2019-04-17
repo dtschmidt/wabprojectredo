@@ -2,6 +2,8 @@ package com.example.wabprojectredo
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -105,19 +107,28 @@ class LoginActivity : AppCompatActivity() {
             popup.cancel()
         }
         clickhere.setOnClickListener {
-            val auth = FirebaseAuth.getInstance()
+            if (email.text.toString() != "") {
+                val auth = FirebaseAuth.getInstance()
 
-            auth.sendPasswordResetEmail(email.text.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        popup.cancel()
-                        Log.d("LoginActivity", "Reset password email sent.")
-                        Toast.makeText(this, "Reset password email sent.", Toast.LENGTH_SHORT).show()
+                auth.sendPasswordResetEmail(email.text.toString())
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            popup.cancel()
+                            Log.d("LoginActivity", "Reset password email sent.")
+                            Toast.makeText(this, "Reset password email sent.", Toast.LENGTH_SHORT).show()
+                        }
+                        
                     }
-                    else
-                        Toast.makeText(this, "Did not send password reset email. Try entering your email again.", Toast.LENGTH_SHORT).show()
-                }
-
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Did not send password reset email: ${it.message}", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            }
+            else {
+                Toast.makeText(this, "Please enter your email.", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
         }
         popup.show()
     }

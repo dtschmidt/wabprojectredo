@@ -102,6 +102,8 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    //below method was used to save the user again, but to the database. It shouldn't be needed any longer.
+
     /*private fun saveUserToFirebaseDatabase(){
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")

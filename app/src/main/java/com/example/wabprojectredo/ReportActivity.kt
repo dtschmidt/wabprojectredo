@@ -51,6 +51,8 @@ class ReportActivity : AppCompatActivity() {
 
         btn_report_submit.setOnClickListener {
             performSubmit(anonIsChecked)
+
+
         }
 
         btn_report_uploadfile.setOnClickListener {
@@ -121,9 +123,16 @@ class ReportActivity : AppCompatActivity() {
                 Log.d("ReportActivity", "Successfully uploaded image: ${it.metadata?.path}")
 
                 ref.downloadUrl.addOnSuccessListener {
-                    Log.d("ReportActivity", "File locaiton: $it")
+                    Log.d("ReportActivity", "File location: $it")
                     imageDownloadUrl = it.toString()
                 }
+            }
+
+            .addOnFailureListener{
+                Toast.makeText(
+                    this, "Failed to upload image: ${it.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
@@ -152,6 +161,14 @@ class ReportActivity : AppCompatActivity() {
                     this, "Successfully sumbmitted report. Thank you.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                //open email prompt with prefilled fields
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "plain/text"
+                intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("wildcatsagainstbullying@gmail.com"))
+                intent.putExtra(Intent.EXTRA_SUBJECT, "REPORT $enteredDate")
+                intent.putExtra(Intent.EXTRA_TEXT, "$enteredName:\n$enteredDescription\n$imageurl")
+                startActivity(Intent.createChooser(intent, ""))
             }
             .addOnFailureListener() {
                 Log.d("ReportActivity", "Failed to save report: ${it.message}")

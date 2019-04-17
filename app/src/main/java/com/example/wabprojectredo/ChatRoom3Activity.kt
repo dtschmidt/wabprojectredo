@@ -44,7 +44,7 @@ class ChatRoom3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room3)
 
-        supportActionBar?.title = "Chat Room 3"
+        supportActionBar?.title = "Wildcat Chat"
 
         recyclerview_cr3_messages.adapter = adapter
         //setupDummyData()

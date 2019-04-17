@@ -44,7 +44,7 @@ class ChatRoom1Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room1)
 
-        supportActionBar?.title = "Chat Room 1"
+        supportActionBar?.title = "Physical Bullying"
 
         recyclerview_cr1_messages.adapter = adapter
         //setupDummyData()
